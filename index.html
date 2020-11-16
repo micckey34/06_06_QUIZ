@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="ui">
+        <header>
+            <h1>Little Glee Monster</h1>
+        </header>
+        <main>
+            <img class="img" src="img/logo.jpg" width="600px" height="600px">
+            <div class="question-box">
+                <h2 id="count"></h2>
+                <p id="question"></p>
+            </div>
+            <div class="answer-box">
+                <div class="select">
+                    <input type="radio" id="q1" value="0" name="choice">
+                    <label for="q1" id="q1-label"></label>
+                </div>
+                <div class="select">
+                    <input type="radio" id="q2" value="1" name="choice">
+                    <label for="q2" id="q2-label"></label>
+                </div>
+                <div class="select">
+                    <input type="radio" id="q3" value="2" name="choice">
+                    <label for="q3" id="q3-label"></label>
+                </div>
+                <div class="select">
+                    <input type="radio" id="q4" value="3" name="choice">
+                    <label for="q4" id="q4-label"></label>
+                </div>
+            </div>
+        </main>
+        <div class="result-box">
+            <div>
+                <h3>答え！</h3>
+                <p id="result"></p>
+            </div>
+            <div>
+                <h3>正解数</h3>
+                <p id="true-count"></p>
+            </div>
+        </div>
+        <div class="start">
+            <h2 id="start">リトグリクイズ！</h2>
+            <button id="start-btn">はじめる</button>
+        </div>
+        <div class="win">
+            <h2 id="last">おめでとう!😀</h2>
+            <p>君は立派なガオラーだ！！</p>
+            <a id="last2" href="ri-zero/start.html">ボーナスゲーム！</a>
+            <button id="reset">もういちど！</button>
+        </div>
+        <div class="lose">
+            <h2 id="last">残念😭</h2>
+            <button id="reset2">もういちど！</button>
+        </div>
+    </div>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+        const questions = [
+            'リトグリのメジャーデビューはいつ？',
+            'リトグリの認知度を上げるきっかけとなった、ドラマ主題歌にもなった四枚目シングルは何？',
+            '2017年目標の武道館講演を叶えたリトグリ。最初に歌ったのは？',
+            '8枚目シングル「だから、ひとりじゃない」、どこで撮影された？',
+            '「ECHO」のMVにゲスト出演した有名人は？',
+            '道に迷ったら確認するのは？',
+            'メンバー最年少はだれ？',
+            'manakaの出身はどこ？',
+            'manakaの尊敬しているアーティストは？',
+            'manakaの歌い出しで始まる曲は？'
+        ];
+        const choices = [
+            ['2012年', '2013年', '2014年', '2015年'],
+            ['人生は一度きり', '好きだ', '放課後ハイファイブ', '世界はあなたに笑いかけている'],
+            ['はじまりのうた', 'SAY', 'Sessons of Love', 'STARTING OVER'],
+            ['ユニバーサルスタジオジャパン', 'ディズニーランド', '富士急ハイランド', '三井グリーンランド'],
+            ['城田優', 'ゴスペラーズ', '山崎育三郎', '五郎丸歩'],
+            ['携帯', '地図', '自分の気持ち', '後ろ'],
+            ['アサヒ', 'MAYU', 'serina', 'manaka'],
+            ['熊本県', '大阪府', '東京都', '静岡県'],
+            ['Pentatonix', 'Earth,Wind & Fire', 'ABBA', 'Beatles'],
+            ['夏になって歌え', '小さな恋が終わった', '好きだ', '足跡'],
+        ];
+        const answer = [2, 1, 2, 0, 3, 2, 3, 1, 3, 0];
+        let count = 0;
+        let trueCount = 0;
+
+        $('.win').hide();
+        $('.lose').hide();
+        $('#count').text(`第${count+1}問`);
+        $('#question').text(questions[count]);
+        $('#q1-label').text(choices[count][0]);
+        $('#q2-label').text(choices[count][1]);
+        $('#q3-label').text(choices[count][2]);
+        $('#q4-label').text(choices[count][3]);
+        $('#start-btn').on('click', function() {
+            $('.start').hide();
+        });
+
+        $('input[name=choice]').on('click', function() {
+
+
+            if ($(this).val() == answer[count]) {
+                $('#result').text('正解！！');
+                trueCount++;
+                console.log('正解数' + trueCount)
+                $('#true-count').text(trueCount);
+                count++;
+                console.log(count)
+
+            } else {
+                $('#result').text('不正解！')
+                count++;
+                console.log(count)
+            };
+            if (count < questions.length) {
+                $('#count').text(`第${count+1}問`);
+                $('#question').text(questions[count]);
+                $('#q1-label').text(choices[count][0]);
+                $('#q2-label').text(choices[count][1]);
+                $('#q3-label').text(choices[count][2]);
+                $('#q4-label').text(choices[count][3]);
+                if (count == 1) {
+                    $('.img').attr('src', 'img/sukida.jpg')
+                } else if (count == 2) {
+                    $('.img').attr('src', 'img/budoukan.jpg')
+                } else if (count == 3) {
+                    $('.img').attr('src', 'img/dakara.jpg')
+                } else if (count == 4) {
+                    $('.img').attr('src', 'img/echo.jpg')
+                } else if (count == 5) {
+                    $('.img').attr('src', 'img/clocetoyou.jpg')
+                } else if (count == 6) {
+                    $('.img').attr('src', 'img/yontaku.jpg')
+                } else if (count == 7) {
+                    $('.img').attr('src', 'img/manaka1.jpg')
+                } else if (count == 8) {
+                    $('.img').attr('src', 'img/manaka2.jpg')
+                } else if (count == 9) {
+                    $('.img').attr('src', 'img/manaka3.jpg')
+                }
+            } else {
+                $('.win').show();
+                $('.lose').show();
+                if (trueCount >= 7) {
+                    $('.lose').hide();
+                } else {
+                    $('.win').hide();
+                }
+            }
+
+        })
+        $('#reset').on('click', function() {
+            count = 0;
+            trueCount = 0;
+            $('#true-count').text('0');
+            $('#result').text('');
+            $('.win').hide();
+            $('.lose').hide();
+            $('#count').text(`第${count+1}問`);
+            $('#question').text(questions[count]);
+            $('#q1-label').text(choices[count][0]);
+            $('#q2-label').text(choices[count][1]);
+            $('#q3-label').text(choices[count][2]);
+            $('#q4-label').text(choices[count][3]);
+        })
+        $('#reset2').on('click', function() {
+            count = 0;
+            trueCount = 0;
+            $('#true-count').text('0');
+            $('#result').text('');
+            $('.win').hide();
+            $('.lose').hide();
+            $('#count').text(`第${count+1}問`);
+            $('#question').text(questions[count]);
+            $('#q1-label').text(choices[count][0]);
+            $('#q2-label').text(choices[count][1]);
+            $('#q3-label').text(choices[count][2]);
+            $('#q4-label').text(choices[count][3]);
+        })
+    </script>
+    <audio preload="auto" src="bgm/1013162188-06-01-STARTINGOVER.m4a" autoplay loop>
+    対応してません</audio>
+</body>
+
+</html>

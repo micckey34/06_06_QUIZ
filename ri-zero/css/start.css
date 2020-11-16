@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+}
+
+.ui {
+    width: 1200px;
+    height: 690px;
+    margin: 3rem auto;
+    border: 2px solid white;
+    background: url(../img/title.jpg)center center/cover;
+}
+
+.title {
+    width: 1200px;
+    text-align: center;
+    padding: 4rem;
+    color: white;
+}
+
+h1 {
+    font-size: 45px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+.start {
+    width: 400px;
+    height: 100px;
+    margin: 20rem auto 0 auto;
+    text-align: center;
+    background: rgba(200, 200, 200, 0.5);
+    border: white 2px solid;
+}
+
+.start:hover {
+    background: rgb(120, 0, 150);
+}
+
+a {
+    display: block;
+    line-height: 100px;
+    color: white;
+    font-size: 50px;
+    text-decoration: none;
+}

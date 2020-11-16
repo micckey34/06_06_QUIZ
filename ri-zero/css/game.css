@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+    color: white;
+}
+
+img {}
+
+label {
+    display: block;
+}
+
+.ui {
+    width: 1200px;
+    height: 690px;
+    margin: 3rem auto;
+    position: relative;
+    border: 3px solid white;
+}
+
+.enemy {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 900px;
+    height: 55px;
+    padding: 0 20px;
+    background: rgba(120, 70, 200, 0.6);
+    border-radius: 20px;
+}
+
+.enemy meter {
+    width: 860px;
+    height: 25px;
+}
+
+.win-lose {
+    position: absolute;
+    top: 300px;
+    left: 200px;
+    width: 800px;
+    height: 88px;
+    line-height: 88px;
+    text-align: center;
+    font-size: 40px;
+    z-index: 10;
+}
+
+.win-lose a {
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+.sub-ui {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+    height: 384px;
+    border-radius: 25px;
+    font-size: 20px;
+    background: rgba(120, 70, 200, 0.6);
+}
+
+.result-ui {
+    border-bottom: 2px solid white;
+    width: 150px;
+    text-align: center;
+}
+
+.quiz-box {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    width: 900px;
+    height: 240px;
+    padding: 1rem;
+    border-radius: 25px;
+    background: rgba(120, 70, 200, 0.6);
+}
+
+.log {
+    height: 48px;
+    border-bottom: 2px solid gray;
+    line-height: 48px;
+    font-size: 20px;
+}
+
+.log p {}
+
+.quiz {
+    padding-top: 1rem;
+    height: 110px;
+    font-size: 20px;
+}
+
+.myhp {
+    width: 868px;
+    height: 50px;
+    padding: 0 20px;
+    border-radius: 20px;
+}
+
+.myhp meter {
+    width: 820px;
+    height: 24px;
+}
+
+.select-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 200px;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 25px;
+    background: rgba(120, 70, 200, 0.6);
+}
+
+button {
+    height: 70px;
+    width: 180px;
+    border-radius: 25px;
+    outline: none;
+    font-size: 20px;
+    cursor: pointer;
+    background: rgb(100, 50, 180);
+    color: white;
+}
+
+button:hover {
+    background: snow;
+    color: black;
+}
+
+button:active {
+    background: rgb(207, 203, 203);
+}

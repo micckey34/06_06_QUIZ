@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re:ゼロから始まる異世界生活</title>
+    <link rel="stylesheet" href="css/game.css">
+</head>
+
+<body>
+    <div class="ui">
+        <img src="img/petergius1.png" alt="" width="1194px" height="684px">
+        <div class="enemy">
+            <label for="HP">ペテルギウス・ロマネコンティ</label>
+            <meter id="HP" min="0" max="5000" low="500" high="4000" optimum="5000" value="5000"></meter>
+        </div>
+        <div class="win-lose">
+            <a id="win-lose" href=""></a>
+        </div>
+        <div class="sub-ui">
+            <p class="result-ui">答え</p>
+            <p id="result">- - -</p>
+            <p id="answer">- - -</p>
+            <p class="result-ui">正解数</p>
+            <p id="true-count">- - -</p>
+        </div>
+        <div class="quiz-box">
+            <div class="log">
+                <p>- - - - - - - -</p>
+            </div>
+            <div class="quiz">
+                <p id="question-count">- - - -</p>
+                <p id="question">- - - - - - - - - -</p>
+            </div>
+            <div class="myhp">
+                <label for="HP2">ナツキ・スバル</label>
+                <meter id="HP2" min="0" max="1000" low="300" high="700" optimum="800" value="1000"></meter>
+            </div>
+        </div>
+        <div class="select-btn">
+            <button name="select" id="choice01" value="0">- - -</button>
+            <button name="select" id="choice02" value="1">- - -</button>
+            <button name="select" id="choice03" value="2">- - -</button>
+        </div>
+        <audio preload="auto" src="../bgm/game-bgm.mp3" autoplay loop></audio>
+    </div>
+    <script id="bgm" src="../jquery-3.5.1.min.js"></script>
+    <script>
+        const questions = [
+            'ラムとレムの誕生日はいつ？',
+            'ユリウスの精霊でないものは？',
+            'リンガのおっちゃんの娘の名前は？',
+            'レムの愛用の武器の名前は？',
+            'スバルがロズワール邸で最初に出会ったのは？',
+            'クルシュ邸での白鯨討伐の交渉の時にスバルが呼んだ人物は？',
+            'ガーフィールは何歳？',
+            '強欲の大罪司教の名前は？',
+            'ベアトリスの親は？',
+            'アーラム村に魔獣を招き入れた魔獣使いの名前は？',
+            'アーラム村の村長の名前は？',
+            '一話に出てきた盗人三人組、「ガストン」「カンバリー」もう一人は？',
+            '色欲の魔女、名前は？',
+            'リンガのおっちゃん、名前は？',
+            'ルグニカ王国で一番の治癒魔術師は？',
+            'アナスタシアはどこの出身？',
+            'スバルくんの「〇」が好きです。',
+            'クルシュはその美貌と剣の実力からなんと言われている？',
+            'スバルの魔法は何属性？',
+            'ヴィルヘルムの嫁の名前は？',
+            'アーラム村を襲った犬型の魔獣の名前は？',
+            '３大魔獣「白鯨」生みの親は？',
+            'フェルトの加護は？',
+            'ミミの弟、「へータロー」ともう一人は？',
+            'スバルを殺したことがないのは？',
+            'ペテルギウスは何の大罪司教？',
+            'ロズワールの目的は？',
+            'ロム爺がスバルの携帯を見積もった時いくらになった？',
+            '王選候補者は「エミリア」、「アナスタシア」、「クルシュ」、「フェルト」あと一人は？',
+            '脳が？',
+
+        ];
+        const choices = [
+            ['２月２日', '８月８日', '１２月５日'],
+            ['クア', 'ネス', 'イオ'],
+            ['ルナ', 'プラム', 'ローパー'],
+            ['アイアンハンマー', 'フレイル', 'モーニングスター'],
+            ['ラムとレム', 'エミリア', 'ベアトリス'],
+            ['カルステン', 'ラッセル', 'レオナルト'],
+            ['14歳', '19歳', '22歳'],
+            ['レグルス', 'シリウス', 'ロイ・アルファルド'],
+            ['エキドナ', 'サテラ', 'ロズワール'],
+            ['ユミル', 'カリーナ', 'メイリィ'],
+            ['ミルデ', 'リュカ', 'ムラオサ'],
+            ['リカート', 'ラチンス', 'へータロー'],
+            ['カーミラ', 'プラム', 'ミネルヴァ'],
+            ['カドモン', 'ベルトルド', 'エドウィン'],
+            ['イア', 'フェリス', 'エミリア'],
+            ['プリステラ', 'ルグニカ', 'カララギ'],
+            ['顔', '声', '手'],
+            ['戦姫', '剣聖', '戦乙女'],
+            ['影', '陰', '闇'],
+            ['マイア', 'テレシア', 'リアラ'],
+            ['オルトロス', 'バジリスク', 'ウルガルム'],
+            ['サテラ', 'テュフォン', 'ダフネ'],
+            ['風の加護', '疾風の加護', '風除けの加護'],
+            ['ルミール', 'オット', 'ティビー'],
+            ['フェリス', 'レム', 'パック'],
+            ['傲慢', '怠惰', '憤怒'],
+            ['龍殺し', 'エミリアを王に', 'エキドナの復活'],
+            ['銀貨200枚', '金貨20枚', '聖金貨10枚'],
+            ['プリシラ', 'セクメト', 'ペトラ'],
+            ['痺れる', '震える', '痛む'],
+
+        ];
+        const answer = [0, 2, 1, 2, 2, 1, 0, 0, 0, 2, 0, 1, 0, 0, 1, 2, 1, 2, 1, 1, 2, 2, 0, 2, 0, 1, 0, 2, 0, 1];
+        const answer2 = ['２月２日', 'イオ', 'プラム', 'ベアトリス', 'モーニングスター', 'ラッセル', '14歳', 'レグルス', 'エキドナ', 'メイリィ', 'ミルデ', 'ラチンス', 'カーミラ', 'カドモン', 'フェリス', 'カララギ', '声', '戦乙女', '陰', 'テレシア', 'ウルガルム', 'ダフネ', '風の加護', 'ティビー', 'フェリス', '怠惰', '龍殺し', '聖金貨10枚', 'プリシラ', '震える'];
+        let count = 0;
+        let trueCount = 0;
+        let random = Math.floor(Math.random() * 30);
+        $(function() {
+            $('#question-count').text(`第${count+1}問`);
+            $('#question').text(questions[random]);
+            $('#choice01').text(choices[random][0]);
+            $('#choice02').text(choices[random][1]);
+            $('#choice03').text(choices[random][2]);
+
+        })
+
+        //選択肢を選んだときの処理
+        $('button[name=select]').on('click', function() {
+            $('#answer').text(answer2[random]);
+            if ($(this).val() == answer[random]) {
+                $('#result').text('正解！！');
+                trueCount++;
+                $('#true-count').text(trueCount);
+                if (random >= 19) {
+                    let enemyHp = $('#HP').val()
+                    enemyHp -= 200;
+                    $('#HP').val(enemyHp);
+                    $('.log').text('スバルは200の攻撃を与えた');
+                } else if (random >= 4) {
+                    let enemyHp = $('#HP').val()
+                    enemyHp -= 300;
+                    $('#HP').val(enemyHp);
+                    $('.log').text('スバルは300の攻撃を与えた');
+                } else {
+                    let enemyHp = $('#HP').val()
+                    enemyHp -= 500;
+                    $('#HP').val(enemyHp);
+                    $('.log').text('会心の一撃！スバルは500の攻撃を与え、体力を200回復した');
+                    let myHp = $('#HP2').val()
+                    myHp += 200;
+                    $('#HP2').val(myHp);
+                };
+                count++;
+            } else {
+                $('#result').text('不正解！')
+                if (random >= 19) {
+                    let myHp = $('#HP2').val()
+                    myHp -= 400;
+                    $('#HP2').val(myHp);
+                    $('.log').text('会心の一撃！スバルは400のダメージを負い、ペテルギウスは体力を1000回復した');
+                    let enemyHp = $('#HP').val()
+                    enemyHp += 1000;
+                    $('#HP').val(enemyHp);
+                } else if (random >= 5) {
+                    let myHp = $('#HP2').val()
+                    myHp -= 200;
+                    $('#HP2').val(myHp);
+                    $('.log').text('スバルは200のダメージを負い、ペテルギウスは体力を500回復した');
+                    let enemyHp = $('#HP').val()
+                    enemyHp += 500;
+                    $('#HP').val(enemyHp);
+                } else {
+                    let myHp = $('#HP2').val()
+                    myHp -= 100;
+                    $('#HP2').val(myHp);
+                    $('.log').text('スバルは100のダメージを負い、ペテルギウスは体力を200回復した');
+                    let enemyHp = $('#HP').val()
+                    enemyHp += 100;
+                    $('#HP').val(enemyHp);
+                };
+                count++;
+            };
+            //問題終了時の処理
+            let enemy = $('#HP').val();
+            let allies = $('#HP2').val()
+            console.log('ペテ公のHP' + enemy)
+            console.log('スバルのHP' + allies)
+            console.log('正解数' + trueCount)
+            console.log('問題数' + (count + 1))
+            random = Math.floor(Math.random() * 30);
+            //hpが０のときの処理
+            if (enemy >= 1 && allies >= 1) {
+                $('#question-count').text(`第${count+1}問`);
+                $('#question').text(questions[random]);
+                $('#choice01').text(choices[random][0]);
+                $('#choice02').text(choices[random][1]);
+                $('#choice03').text(choices[random][2]);
+            } else if (enemy <= 0) {
+                $('.win-lose').css('background', 'red');
+                $('#win-lose').text('ペテルギウスを倒した！');
+                $('#win-lose').attr('href', 'clear.html');
+                $('#choice01').hide();
+                $('#choice02').hide();
+                $('#choice03').hide();
+                $('#question-count').text('- - -');
+                $('#question').text('- - - - - - -');
+            } else if (allies <= 0) {
+                $('.win-lose').css('background', 'blue');
+                $('#win-lose').text('スバルはやられてしまった');
+                $('#win-lose').attr('href', 'game.html');
+                $('#choice01').hide();
+                $('#choice02').hide();
+                $('#choice03').hide();
+                $('#question-count').text('- - -');
+                $('#question').text('- - - - - - -');
+            }
+
+        })
+    </script>
+</body>
+
+</html>
